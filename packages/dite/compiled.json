@@ -1,0 +1,4 @@
+{
+  "deps": ["webpack-5-chain", "es-module-lexer"],
+  "externals": {}
+}

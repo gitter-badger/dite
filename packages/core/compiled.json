@@ -1,0 +1,19 @@
+{
+  "deps": [
+    "get-port",
+    "joi",
+    "tapable",
+    "dotenv",
+    "just-diff",
+    "arg",
+    "file-system-cache"
+  ],
+  "externals": {
+    "joi": "$$LOCAL",
+    "dotenv": "$$LOCAL",
+    "tapable": "$$LOCAL",
+    "file-system-cache": "$$LOCAL",
+    "just-diff": "$$LOCAL",
+    "arg": "$$LOCAL"
+  }
+}

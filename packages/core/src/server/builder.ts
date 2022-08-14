@@ -1,0 +1,69 @@
+import type { Env } from '@dite/core';
+import { fse } from '@dite/utils';
+import glob from '@dite/utils/compiled/fast-glob';
+import esbuild from 'esbuild';
+import path from 'path';
+
+const apiOutputPath = '.dite/server';
+
+interface BuilderOptions {
+  dir: string;
+  env: Env;
+  cwd: string;
+}
+
+export class Builder {
+  private readonly opts: BuilderOptions;
+  protected readonly serverOutputPath: string;
+  public readonly dir: string;
+
+  constructor(opts: BuilderOptions) {
+    this.opts = opts;
+    this.dir = opts.dir;
+    this.serverOutputPath = path.join(this.opts.cwd, apiOutputPath);
+  }
+
+  public async buildAll() {
+    const files = glob.sync('**/*.+(js|jsx|ts|tsx)', {
+      cwd: this.opts.dir,
+      absolute: true,
+    });
+    await this.build(files, { isFirstTime: true });
+  }
+
+  public async build(
+    files: string[] | string,
+    opts: { isFirstTime: boolean } = { isFirstTime: true },
+  ) {
+    const tsconfig = path.join(this.opts.dir, './tsconfig.json');
+    const res = await esbuild.build({
+      sourcemap: false,
+      platform: 'node',
+      target: 'node14',
+      bundle: false,
+      // plugins: [await esbuildDecorators({ tsconfig })],
+      entryPoints: [...(Array.isArray(files) ? files : [files])],
+      outdir: this.serverOutputPath,
+      incremental: true,
+      format: 'cjs',
+      write: opts.isFirstTime,
+      tsconfig,
+    });
+    if (res.outputFiles) {
+      const files: string[] = [];
+      res.outputFiles?.forEach((file) => {
+        fse.writeFileSync(file.path, file.contents);
+        delete require.cache[file.path];
+        files.push(file.path);
+      });
+      return files;
+    }
+    return [];
+  }
+}
+
+export async function buildDir(opts: { dir: string; env: Env; cwd: string }) {
+  const builder = new Builder({ dir: opts.dir, env: opts.env, cwd: opts.cwd });
+  await builder.buildAll();
+  return builder;
+}

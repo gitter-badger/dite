@@ -1,0 +1,65 @@
+{
+  "name": "@dite/bundler-vite",
+  "version": "0.1.0",
+  "description": "@dite/bundler-vite",
+  "keywords": [
+    "dite"
+  ],
+  "homepage": "https://github.com/ditejs/dite/tree/master/packages/bundler/bundler-vite#readme",
+  "bugs": {
+    "url": "https://github.com/ditejs/dite/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ditejs/dite"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "compiled"
+  ],
+  "scripts": {
+    "build": "pnpm fastsc build",
+    "build:deps": "dite-scripts pkgCompile",
+    "dev": "pnpm build -- --watch"
+  },
+  "dependencies": {
+    "@dite/bundler-utils": "0.1.0",
+    "@dite/core": "0.1.0",
+    "@dite/utils": "0.1.0",
+    "@esbuild-plugins/node-resolve": "^0.1.4",
+    "@vitejs/plugin-react": "^2.0.0",
+    "esbuild": "^0.14.49",
+    "ts-loader": "^9.3.1",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "typescript": "^4.7.4",
+    "webpack": "^5.73.0",
+    "webpack-node-externals": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/caniuse-lite": "1.0.1",
+    "@types/rollup-plugin-visualizer": "4.2.1",
+    "@types/svgo": "2.6.3",
+    "@types/webpack-node-externals": "^2.5.3",
+    "@vitejs/plugin-legacy": "^2.0.0",
+    "caniuse-lite": "1.0.30001374",
+    "cross-spawn": "7.0.3",
+    "es-module-lexer": "^1.0.0",
+    "fast-glob": "3.2.11",
+    "rollup": "^2.70.1",
+    "rollup-plugin-copy": "3.4.0",
+    "speed-measure-webpack-plugin": "1.5.0",
+    "vite": "^3.0.4",
+    "webpack-5-chain": "8.0.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "authors": [
+    "Zack <lorenx@163.com> (https://github.com/loyep)"
+  ]
+}

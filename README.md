@@ -1,5 +1,7 @@
 # dite
 
+[![Join the chat at https://gitter.im/ditejs/dite](https://badges.gitter.im/ditejs/dite.svg)](https://gitter.im/ditejs/dite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## 🚀 Features
 - 🔋 **SSR Friendly**
 
